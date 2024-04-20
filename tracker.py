@@ -76,12 +76,11 @@ def main_crawl():
             website_data = {
                 "status": status,
                 "content_type": content_type,
-                "html": html,
-                "metadata": metadata,
+                "metadata_length": len(str(metadata)),
                 "sha256": sha256_of_html(html)
             }
 
-            change_detected = old_url_data_loaded and (old_url_data_loaded["sha256"] != website_data["sha256"])
+            change_detected = old_url_data_loaded and (old_url_data_loaded["sha256"] != website_data["sha256"] or old_url_data_loaded["status"] != website_data["status"])
             
             if not old_url_data_loaded or change_detected:
                 embed_color = 0x00ff00 if not old_url_data_loaded else 0xff0000
