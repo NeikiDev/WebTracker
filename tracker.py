@@ -4,9 +4,7 @@ import os
 import json
 import time
 from bs4 import BeautifulSoup
-
-urls = "urls.txt"
-WEBHOOK_URL = "<YOUR_WEBHOOK_URL>"
+from urllib.parse import urljoin, quote_plus
 
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0";
 
@@ -40,7 +38,19 @@ def url_as_md5(url):
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def countdown(t):
+    while t:
+        mins, secs = divmod(t, 60)
+        timer = 'Next crawl in: {:02d}:{:02d}'.format(mins, secs)
+        print(timer, end="\r")
+        time.sleep(1)
+        t -= 1
+
 def main_crawl():
+    urls = "urls.txt"
+    webhook_url = "<YOUR DISCORD WEBHOOK URL>"
+    crawl_interval = 5 * 60  
+
     while True:
         url_list = open(urls, "r").read().split("\n")
         url_count = len([u for u in url_list if u])
@@ -89,10 +99,10 @@ def main_crawl():
                 with open(file_path, "w") as f:
                     json.dump(website_data, f, indent=4)
 
-                response = requests.post(WEBHOOK_URL, json=xdata)
+                response = requests.post(webhook_url, json=xdata)
                 print(f"Sent {url} to webhook with status code {response.status_code}")
 
-        time.sleep(60)
+        countdown(crawl_interval)
 
 if __name__ == '__main__':
     main_crawl()
