@@ -93,7 +93,12 @@ def main_crawl():
                     "username": "Webtracker",
                     "embeds": [{
                         "title": "Website Data",
-                        "description": f"Status Code: {website_data['status']}\nBody Hash: {website_data['sha256']}\nBody Length: {len(html)}\nMetadata Length: {len(metadata)}",
+                        "description": f"""
+                            **Status Code:** {old_url_data_loaded["status"]} => {status}
+                            **Content Type:** {old_url_data_loaded["content_type"]} => {content_type}
+                            **Metadata Length:** {old_url_data_loaded["metadata_length"]} => {len(str(metadata))}
+                            **SHA256:** {old_url_data_loaded["sha256"]} => {website_data["sha256"]}
+                        """,
                         "color": embed_color
                     }]
                 }
