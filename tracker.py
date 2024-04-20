@@ -89,17 +89,22 @@ def main_crawl():
             if not old_url_data_loaded or change_detected:
                 embed_color = 0x00ff00 if not old_url_data_loaded else 0xff0000
                 action = "First crawl" if not old_url_data_loaded else "Changes detected"
+                old_status = old_url_data_loaded["status"] if old_url_data_loaded else 0
+                old_content_type = old_url_data_loaded["content_type"] if old_url_data_loaded else ""
+                old_metadata_length = old_url_data_loaded["metadata_length"] if old_url_data_loaded else 0
+                old_sha256 = old_url_data_loaded["sha256"] if old_url_data_loaded else ""
+                old_html_length = old_url_data_loaded["html_length"] if old_url_data_loaded else 0
                 xdata = {
                     "content": f"{action} of {url} - {url_hash}",
                     "username": "Webtracker",
                     "embeds": [{
                         "title": "Website Data",
                         "description": f"""
-                            **Status Code:** {old_url_data_loaded["status"]} => {status}
-                            **Content Type:** {old_url_data_loaded["content_type"]} => {content_type}
-                            **Metadata Length:** {old_url_data_loaded["metadata_length"]} => {len(str(metadata))}
-                            **SHA256:** {old_url_data_loaded["sha256"]} => {website_data["sha256"]}
-                            **HTML Length:** {old_url_data_loaded["html_length"]} => {len(html)}
+                            **Status Code:** {old_status} => {status}
+                            **Content Type:** {old_content_type} => {content_type}
+                            **Metadata Length:** {old_metadata_length} => {len(str(metadata))}
+                            **SHA256:** {old_sha256} => {website_data["sha256"]}
+                            **HTML Length:** {old_html_length} => {len(html)}
                         """,
                         "color": embed_color
                     }]
