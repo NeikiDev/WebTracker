@@ -65,6 +65,9 @@ def main_crawl():
             url_hash = url_as_md5(url)
             file_path = f"./tracked/{url_hash}.json"
 
+            if not os.path.exists("./tracked"):
+                os.makedirs("./tracked")
+
             if os.path.exists(file_path):
                 with open(file_path, "r") as f:
                     old_url_data_loaded = json.load(f)
