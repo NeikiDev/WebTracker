@@ -79,6 +79,7 @@ def main_crawl():
             website_data = {
                 "status": status,
                 "content_type": content_type,
+                "html_length": len(html),
                 "metadata_length": len(str(metadata)),
                 "sha256": sha256_of_html(html)
             }
@@ -98,6 +99,7 @@ def main_crawl():
                             **Content Type:** {old_url_data_loaded["content_type"]} => {content_type}
                             **Metadata Length:** {old_url_data_loaded["metadata_length"]} => {len(str(metadata))}
                             **SHA256:** {old_url_data_loaded["sha256"]} => {website_data["sha256"]}
+                            **HTML Length:** {old_url_data_loaded["html_length"]} => {len(html)}
                         """,
                         "color": embed_color
                     }]
