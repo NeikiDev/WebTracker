@@ -12,7 +12,6 @@ Change the `WEBHOOK_URL` in `tracker.py` to your Discord Webhook URL
 WEBHOOK_URL = "<YOUR_WEBHOOK_URL>"
 ```
 
-
 ## Usage
 Save your urls in `urls.txt` file
 ```txt
